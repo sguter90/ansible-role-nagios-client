@@ -3,8 +3,6 @@ Ansible Role: Nagios Client
 
 Install and configure Nagios Client (NRPE) on CentOS
 
-# NOT PRODUCTION READY - ONLY USE AT YOUR OWN RISK
-
 Requirements
 ------------
 
