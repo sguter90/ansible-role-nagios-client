@@ -93,8 +93,6 @@ None.
 Example Playbook
 ----------------
 
-
-
 ```yaml
 # deploy-nagios-client.yml
 - name: setup nagios client
@@ -106,6 +104,8 @@ Example Playbook
   roles:
     - { role: sguter90.ansible-role-nagios-client }
 ```
+
+Full playbook example available at: [sguter90/ansible-playbook-nagios-client](https://github.com/sguter90/ansible-playbook-nagios-client)
 
 License
 -------
