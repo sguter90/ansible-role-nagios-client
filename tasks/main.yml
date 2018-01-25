@@ -1,0 +1,97 @@
+---
+
+- name: install nagios packages
+  yum: name={{ item }}
+       state=present
+  with_items:
+    - nagios-common
+    - nagios-plugins
+    - xinetd
+    - nrpe
+
+
+- name: enable nrpe service
+  service:
+    name: nrpe
+    enabled: yes
+
+
+- name: add /etc/nagios/nrpe.cfg
+  template:
+    src: "nrpe.cfg.j2"
+    dest: "/etc/nagios/nrpe.cfg"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart nrpe
+
+
+- name: add configured hosts to /etc/hosts.allow
+  lineinfile:
+    path: /etc/hosts.allow
+    regexp: '^nrpe\:'
+    line: "nrpe: {{ nrpe_client_allowed_hosts|join(',') }}"
+
+
+- name: copy plugins from {{ nrpe_local_plugin_dir }} to remote host
+  copy:
+    src: "{{ item }}"
+    dest: "{{ nrpe_client_plugin_path }}"
+  with_fileglob:
+    - "{{ nrpe_local_plugin_dir }}/*"
+
+
+- name: ensure correct plugin file permissions are set
+  file:
+    dest: "{{ nrpe_client_plugin_path }}"
+    owner: nagios
+    group: nagios
+    mode: 0774
+    recurse: yes
+
+
+- name: ensure correct plugin directory permissions are set
+  file:
+    dest: "{{ nrpe_client_plugin_path }}"
+    owner: nagios
+    group: nagios
+    mode: 0775
+
+
+- name: create nrpe.d from nrpe_commands
+  template:
+    src: "nrped_commands.cfg.j2"
+    dest: "/etc/nrpe.d/commands.cfg"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart nrpe
+
+
+- name: copy nrpe.d configuration from {{ nrpe_local_nrped_dir }} to remote host
+  copy:
+    src: "{{ item }}"
+    dest: /etc/nrpe.d
+  with_fileglob:
+    - "{{ nrpe_local_nrped_dir }}/*"
+  notify: restart nrpe
+
+
+- name: copy additional nagios configuration from {{ nrpe_local_etc_dir }} to remote host
+  copy:
+    src: "{{ item }}"
+    dest: /etc/nagios
+  with_fileglob:
+    - "{{ nrpe_local_etc_dir }}/*"
+
+
+- name: add /etc/rsyslog.d/nrpe.conf
+  template:
+    src: "rsyslog-nrpe.conf.j2"
+    dest: "/etc/rsyslog.d/nrpe.conf"
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart rsyslog
+    - restart nrpe

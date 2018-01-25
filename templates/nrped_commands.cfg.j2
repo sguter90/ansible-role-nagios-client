@@ -1,0 +1,6 @@
+# Don't edit manually!
+# {{ ansible_managed }}
+
+{% for nrpe_command in nrpe_client_commands %}
+command[{{ nrpe_command.name }}]={{ nrpe_client_plugin_path }}{{ nrpe_command.command }}
+{% endfor %}

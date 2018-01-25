@@ -1,0 +1,17 @@
+---
+
+nrpe_client_allowed_hosts:
+    - 127.0.0.1
+nrpe_client_debug: 0
+nrpe_client_dont_blame_nrpe: 1
+nrpe_client_plugin_path: /usr/lib64/nagios/plugins
+nrpe_client_pid_file: /var/run/nrpe/nrpe.pid
+nrpe_client_server_port: 5666
+nrpe_client_command_timeout: 60
+nrpe_client_connection_timeout: 300
+nrpe_client_rsyslog_facility_name: nrpe
+nrpe_client_rsyslog_file: /var/log/nrpe.log
+nrpe_client_commands: []
+nrpe_local_plugin_dir: files/plugins
+nrpe_local_nrped_dir: files/nrpe.d
+nrpe_local_etc_dir: files/etc

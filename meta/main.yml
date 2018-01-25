@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  author: sguter90
+  description: Install and configure nagios client (NRPE)
+  license: BSD
+  min_ansible_version: 1.4
+  platforms:
+  - name: EL
+    versions:
+        - all
+  categories:
+      - system
+      - monitoring
+dependencies: []
