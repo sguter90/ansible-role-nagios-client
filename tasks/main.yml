@@ -58,7 +58,7 @@
     mode: 0775
 
 
-- name: create nrpe.d from nrpe_commands
+- name: create nrpe.d file from nrpe_commands
   template:
     src: "nrped_commands.cfg.j2"
     dest: "/etc/nrpe.d/commands.cfg"
