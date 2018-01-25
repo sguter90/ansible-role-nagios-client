@@ -21,7 +21,7 @@ nrpe_client_pid_file: /var/run/nrpe/nrpe.pid
 nrpe_client_server_port: 5666
 nrpe_client_command_timeout: 60
 nrpe_client_connection_timeout: 300
-nrpe_client_rsyslog_facility_name: nrpe
+nrpe_client_rsyslog_facility_name: local1
 nrpe_client_rsyslog_file: /var/log/nrpe.log
 nrpe_local_plugin_dir: /tmp/ansible/files/plugins
 nrpe_local_nrped_dir: /tmp/ansible/files/nrpe.d
