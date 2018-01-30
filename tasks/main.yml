@@ -6,6 +6,7 @@
   with_items:
     - nagios-common
     - nagios-plugins
+    - nagios-plugins-mysql
     - xinetd
     - nrpe
 
