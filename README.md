@@ -70,6 +70,9 @@ nrpe_client_commands:
     command: 'check_uptime.pl -c $ARG1$'
   - name: check_volume_var
     command: 'check_volume.sh --volume /var -c $ARG1$ -w ARG2$'
+  - name: check_logfiles
+    command: 'check_which_needs_preparation_script.sh' 
+    pre_init_script: '/etc/nagios/file_which_will_be_sourced.sh'
 ```
 
 This will generate this configuration file in /etc/nrpe.d/commands.cfg which will contain the following:
@@ -79,6 +82,7 @@ This will generate this configuration file in /etc/nrpe.d/commands.cfg which wil
 
 command[check_uptime]=/usr/lib64/nagios/pluginscheck_uptime.pl -c $ARG1$
 command[check_volume_var]=/usr/lib64/nagios/pluginscheck_volume.sh --volume /var -c $ARG1$ -w ARG2$
+command[check_logfiles]=source /etc/nagios/file_which_will_be_sourced.sh && check_which_needs_preparation_script.sh
 ```
 
 
