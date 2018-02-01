@@ -49,6 +49,7 @@
     group: nagios
     mode: 0774
     recurse: yes
+  changed_when: false
 
 
 - name: ensure correct plugin directory permissions are set
@@ -57,6 +58,7 @@
     owner: nagios
     group: nagios
     mode: 0775
+  changed_when: false
 
 
 - name: create nrpe.d file from nrpe_commands
