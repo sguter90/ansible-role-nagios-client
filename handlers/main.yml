@@ -10,3 +10,20 @@
   service:
     name: "rsyslog"
     state: restarted
+
+- name: plugin file permissions
+  file:
+    dest: "{{ nrpe_client_plugin_path }}"
+    owner: nagios
+    group: nagios
+    mode: 0774
+    recurse: yes
+  listen: plugin permissions
+
+- name: plugin dir permissions
+  file:
+    dest: "{{ nrpe_client_plugin_path }}"
+    owner: nagios
+    group: nagios
+    mode: 0775
+  listen: plugin permissions

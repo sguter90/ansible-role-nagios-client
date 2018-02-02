@@ -40,23 +40,7 @@
     dest: "{{ nrpe_client_plugin_path }}"
   with_fileglob:
     - "{{ nrpe_local_plugin_dir }}/*"
-
-
-- name: ensure correct plugin file permissions are set
-  file:
-    dest: "{{ nrpe_client_plugin_path }}"
-    owner: nagios
-    group: nagios
-    mode: 0774
-    recurse: yes
-
-
-- name: ensure correct plugin directory permissions are set
-  file:
-    dest: "{{ nrpe_client_plugin_path }}"
-    owner: nagios
-    group: nagios
-    mode: 0775
+  notify: plugin permissions
 
 
 - name: create nrpe.d file from nrpe_commands
