@@ -12,6 +12,11 @@ Role Variables
 --------------
 #### Full Configuration Example:
 ```yaml
+nrpe_client_packages:
+  - nagios-common
+  - xinetd
+  - nrpe
+  - nagios-plugins
 nrpe_client_allowed_hosts:
     - 127.0.0.1
 nrpe_client_debug: 0
@@ -32,6 +37,7 @@ nrpe_client_commands:
 ```
 
 #### General Options
+`nrpe_client_packages`: system packages that will be installed
 
 `nrpe_client_allowed_hosts`: list of hosts will be added to nrpe.cfg option "allowed_hosts" and /etc/hosts.allow
 

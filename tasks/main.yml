@@ -3,12 +3,7 @@
 - name: install nagios packages
   yum: name={{ item }}
        state=present
-  with_items:
-    - nagios-common
-    - nagios-plugins
-    - nagios-plugins-mysql
-    - xinetd
-    - nrpe
+  with_items: "{{ nrpe_client_packages }}"
 
 
 - name: enable nrpe service
